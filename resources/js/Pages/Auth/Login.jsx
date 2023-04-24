@@ -4,7 +4,7 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { RiMailFill,RiLock2Fill,RiEyeFill,RiEyeOffFill } from "react-icons/ri";
+import {RiMailOpenLine,RiLockLine,RiEyeLine,RiEyeOffLine,RiLockUnlockLine,  } from "react-icons/ri";
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }) {
@@ -26,7 +26,7 @@ export default function Login({ status, canResetPassword }) {
         post(route('login'));
     };
     const [showPassword, setShowPassword]=useState(false)
-   const classIcon='absolute top-1/2 -translate-y-1/2   text-white'
+   const classIcon='absolute top-1/2 -translate-y-1/2   text-primary-300'
    
     return (
         <GuestLayout >
@@ -43,7 +43,7 @@ export default function Login({ status, canResetPassword }) {
                 </button>
                 <div  className='relative'>
                     {/* <InputLabel htmlFor="email" value="Email"   /> */}
-                    <RiMailFill className={classIcon + ' left-2'} />
+                    <RiMailOpenLine className={classIcon + ' left-2'} />
                     <TextInput
                         id="email"
                         type="email"
@@ -61,7 +61,14 @@ export default function Login({ status, canResetPassword }) {
 
                 <div className="mt-4 relative">
                     {/* <InputLabel htmlFor="password" value="Password" /> */}
-                    <RiLock2Fill className={classIcon+ ' left-2'}/>
+                    {showPassword?(
+                        <RiLockUnlockLine className={classIcon+ ' left-2'}/> 
+                    ):
+                   
+                    <RiLockLine className={classIcon+ ' left-2'}/>
+                    }
+                    
+                   
                     <TextInput
                         id="password"
                         type={showPassword ? 'text':'password'}
@@ -73,9 +80,9 @@ export default function Login({ status, canResetPassword }) {
                         onChange={(e) => setData('password', e.target.value)}
                     />
                     {showPassword ? (
-                    <RiEyeOffFill className={classIcon+' right-2 hover:cursor-pointer'}  onClick={()=>setShowPassword(!showPassword)}/>
+                    <RiEyeOffLine className={classIcon+' right-2 hover:cursor-pointer'}  onClick={()=>setShowPassword(!showPassword)}/>
 
-                    ):<RiEyeFill className={classIcon+' right-2 hover:cursor-pointer'} onClick={()=>setShowPassword(!showPassword)}/>
+                    ):<RiEyeLine className={classIcon+' right-2 hover:cursor-pointer'} onClick={()=>setShowPassword(!showPassword)}/>
                 }
                    
                     <InputError message={errors.password} className="mt-2" />
@@ -88,23 +95,43 @@ export default function Login({ status, canResetPassword }) {
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                        <span className="ml-2 text-sm text-gray-600">Recordar</span>
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-center mt-4  w-full">
+                    
+                    <PrimaryButton className=" w-full  text-center flex justify-center"  disabled={processing}>
+                   
+                        Ingresar
+                    </PrimaryButton>
+                </div>
+                <div className="flex items-center  mt-4 justify-between">
+                    <p className='text-gray-600'>¿ no tienes cuenta?
+                <Link href={route('register')} 
+                 className="underline  text-sm text-primary-900 hover:text-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >  Registrese</Link></p>
+                    
                     {canResetPassword && (
+                       
                         <Link
                             href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="underline  text-sm text-gray-600 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Forgot your password?
+                           
+                           
+                           
+                           
+                           Olvidaste tu Contraseña?
                         </Link>
                     )}
 
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
+
+                   
+                    
+                       
+                  
+                    
                 </div>
             </form>
            
