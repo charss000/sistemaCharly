@@ -25,15 +25,15 @@ export const Sidebar1 = () => {
                       Admin<span className="text-primary-300 text-4xl">.</span>
                   </h1>
                   <ul>
-                    <li> <Link to="/"   className={classLink}>
+                    <li> <Link href="/"   className={classLink}>
                     <RiBarChart2Line className={classIcon}/>
                     Analitica
                     </Link></li>
-                    <li> <Link to="/" className={classLink}>
+                    <li> <Link   href="/admin/historia"  className={classLink}>
                     <RiLogoutCircleLine className={classIcon}/>
                     Historias
                     </Link></li>
-                    <li> <Link to="/" className={classLink}>
+                    <li> <Link href="/admin/paciente" className={classLink}>
                     <TbDisabled className={classIcon}/>
                     Paciente
                     </Link></li>
